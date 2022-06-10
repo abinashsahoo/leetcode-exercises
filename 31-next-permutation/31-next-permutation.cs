@@ -19,7 +19,7 @@ public class Solution {
         Reverse(nums, i);         
     }    
 
-    //Start traversing from the end of the array and find an item which is greater that its left neighbour.
+    //Start traversing from the end of the array and find an item which is greater that its left neighbor.
     private int LastPeakIndex(int[] nums)
     {
         int i = nums.Length - 1;
