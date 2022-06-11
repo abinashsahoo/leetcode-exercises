@@ -2,6 +2,7 @@
 //Space complexity : O(1)
 
 //https://ai.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html
+//https://stackoverflow.com/questions/13577174/can-anyone-explain-why-2-shift-means-divided-by-4-in-c-codes
 //middle = (left + right) >> 1;
 //Right shifting binary numbers would divide a number by 2 and left shifting the numbers would multiply it by 2. 
 //middle = (left + right)/2;
