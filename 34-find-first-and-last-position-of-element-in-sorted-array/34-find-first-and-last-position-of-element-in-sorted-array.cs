@@ -7,18 +7,13 @@ public class Solution {
         Array.Fill(result, -1);
         
         if(!nums.Any()) return result;
-        
+       
         while ( left <= right)
         {
             int mid = left + (right - left)/2;
             if(nums[mid] == target)
             {
-                if(mid == left || nums[mid - 1] < target)
-                {
-                    result[0] = mid;
-                    break;
-                }
-                
+                result[0] = mid;
                 right = mid - 1;
             }
             else if(nums[mid] < target)
@@ -39,12 +34,7 @@ public class Solution {
             int mid = left + (right - left)/2;            
             if(nums[mid] == target)
             {
-                if(mid == right || nums[mid + 1] > target)
-                {
-                    result[1] = mid;
-                    break;
-                }
-                
+                result[1] = mid;
                 left = mid + 1;
             }
             else if (nums[mid] < target)
