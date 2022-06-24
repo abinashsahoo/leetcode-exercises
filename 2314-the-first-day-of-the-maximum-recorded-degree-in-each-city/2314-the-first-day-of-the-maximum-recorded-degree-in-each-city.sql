@@ -1,16 +1,21 @@
 /* Write your T-SQL query statement below */
 
-;WITH MaxDegreeCte (city_id,degree)
+WITH CTE(city_id, day, degree, rank)
 AS
 (
-    SELECT city_id, MAX(degree) AS degree
-    FROM Weather
-    GROUP BY city_id
+    SELECT 
+        city_id, 
+        day,
+        degree,
+        RANK() OVER(PARTITION BY city_id ORDER BY degree desc, day asc) rank
+    FROM 
+        Weather
 )
-    
-SELECT w2.city_id, MIN(w2.day) AS day, w2.degree
-FROM MaxDegreeCte w1 
-JOIN Weather w2
-ON w1.city_id = w2.city_id AND w1.degree = w2.degree
-GROUP BY w2.city_id, w2.degree
-ORDER BY w2.city_id
+SELECT 
+    city_id, 
+    day, 
+    degree
+FROM CTE
+WHERE 
+    rank = 1
+ORDER BY city_id
