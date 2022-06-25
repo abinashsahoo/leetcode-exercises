@@ -16,7 +16,7 @@ public class Solution {
         var result = new List<IList<int>>();
         
         var queue = new Queue<TreeNode>();
-        if(root !=null) queue.Enqueue(root);
+        if(root !=null) queue.Enqueue(root); //If root can be null?
         
         while (queue.Count > 0)
         {
