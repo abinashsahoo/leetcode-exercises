@@ -11,39 +11,37 @@
  */
 public class Solution {
     
-    public ListNode SwapPairs(ListNode head) {
+    public ListNode SwapPairs2(ListNode head) {
         
-        ListNode dummy = new ListNode(-1);
-        dummy.next = head;
+        var dummy = new ListNode(-1);
+        //dummy.next = head;    //Not really needed    
+        var prevNode = dummy;
+        var currNode = head;
         
-        ListNode prevNode = dummy;
-        
-        while(head != null && head.next != null)
-        {        
-            prevNode.next = head.next;
-            head.next = prevNode.next.next;
-            prevNode.next.next = head;
+        while(currNode != null && currNode.next != null)
+        {     
+            //Swap Nodes - Approach 1
+            prevNode.next = currNode.next;
+            currNode.next = currNode.next.next;
             
-            prevNode = head;
-            head = head.next;
+            //Moving ahead for the next swap
+            prevNode = currNode;
+            currNode = currNode.next;
         }
         
         return dummy.next;
     }
     
-    public ListNode SwapPairs1(ListNode head) {
+    public ListNode SwapPairs(ListNode head) {
         if(head == null || head.next == null) 
         {
             return head;
         }
         
         var temp = head.next;
-        head.next = temp.next;
+        head.next = SwapPairs(temp.next);
         temp.next = head;
-        head = temp;
         
-        head.next.next = SwapPairs1(head.next.next);
-        
-        return head;
+        return temp;
     }
 }
