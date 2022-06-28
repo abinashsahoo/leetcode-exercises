@@ -26,10 +26,10 @@ public class Solution {
             }
         }
         
-        while (p1 >=0)
-        {
-            nums1[p3--] = nums1[p1--];
-        }
+        // while (p1 >=0)
+        // {
+        //     nums1[p3--] = nums1[p1--];
+        // }
         
         while (p2 >=0)
         {
