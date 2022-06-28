@@ -7,7 +7,7 @@ public class Solution {
         int p2 = n - 1;
         int p = m + n - 1;
         
-        while (p >= 0 && p2 >=0)
+        while (p2 >=0)
         {
             if(p1 >=0 && nums1[p1] > nums2[p2])
             {
