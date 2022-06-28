@@ -1,7 +1,7 @@
 public class Solution {
     
     public double MyPow(double x, int n) {
-        long N = n;
+        int N = n;
         if (N < 0)
         {
             x = 1/x;
@@ -11,7 +11,7 @@ public class Solution {
         return FastPow(x, N);
     }
     
-    private double FastPow(double x, long n) {
+    private double FastPow(double x, int n) {
         if (n == 0)
         {
             return 1;
