@@ -1,21 +1,12 @@
 public class Solution {
     public IList<int> GetRow(int rowIndex) {
-        var row = new List<int>();
-        row.Add(1);
-        
-        if(rowIndex == 0)
-        {
-            return row;
-        }
-        
+        var row = new List<int>();        
         var set = new Dictionary<(int, int), int>();
-        for(int i = 1; i < rowIndex; i++)
+        for(int i = 0; i <= rowIndex; i++)
         {
             int num = GetPascalsTriangleNumber(rowIndex, i, set);
             row.Add(num);
-        }
-        row.Add(1);
-        
+        }        
         return row;        
     }
 
