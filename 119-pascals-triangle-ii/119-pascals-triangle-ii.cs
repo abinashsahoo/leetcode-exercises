@@ -18,34 +18,57 @@ public class Solution {
         
         return row;        
     }
-    
+
     private int GetPascalsTriangleNumber(int row, int column, Dictionary<(int, int), int> set)
     {
-        if(column == 0 || row == column)
-            return 1;
-        
-        int num1 = 0;
-        if(set.ContainsKey((row - 1, column - 1)))
+        if(set.ContainsKey((row, column)))
         {
-            num1 = set[(row - 1, column - 1)];
+            return set[(row, column)];
+        }
+        
+        int result = 0;
+        if(row == 0 || column == 0 || row == column)
+        {
+            result = 1;
         }
         else
         {
-            num1 = GetPascalsTriangleNumber(row - 1, column - 1, set);
-            set.Add((row - 1, column - 1), num1);
+            result = GetPascalsTriangleNumber(row - 1, column - 1, set) + 
+                GetPascalsTriangleNumber(row - 1, column, set);
         }
         
-        int num2 = 0;
-        if(set.ContainsKey((row - 1, column)))
-        {
-             num2 = set[(row - 1, column)];
-        }
-        else
-        {
-            num2 = GetPascalsTriangleNumber(row - 1, column, set);
-            set.Add((row - 1, column), num2);
-        }
-       
-        return num1 + num2;
+        set.Add((row, column), result);
+        return result;
     }
+    
+//     private int GetPascalsTriangleNumber_NOTE(int row, int column, Dictionary<(int, int), int> set)
+//     {
+//         if(row == 0 || column == 0 || row == column)
+//             return 1;
+        
+//         //NOTE: Only store the calculated value;
+//         int num1 = 0;
+//         if(set.ContainsKey((row - 1, column - 1)))
+//         {
+//             num1 = set[(row - 1, column - 1)];
+//         }
+//         else
+//         {
+//             num1 = GetPascalsTriangleNumber(row - 1, column - 1, set);
+//             set.Add((row - 1, column - 1), num1);
+//         }
+        
+//         int num2 = 0;
+//         if(set.ContainsKey((row - 1, column)))
+//         {
+//              num2 = set[(row - 1, column)];
+//         }
+//         else
+//         {
+//             num2 = GetPascalsTriangleNumber(row - 1, column, set);
+//             set.Add((row - 1, column), num2);
+//         }
+       
+//         return num1 + num2;
+//     }
 }
