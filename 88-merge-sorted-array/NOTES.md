@@ -1,0 +1,1 @@
+Built-in sorting algorithm that uses **O(n) space**.
