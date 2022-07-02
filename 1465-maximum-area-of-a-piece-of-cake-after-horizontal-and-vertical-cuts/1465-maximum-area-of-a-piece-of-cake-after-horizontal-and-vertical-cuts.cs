@@ -1,9 +1,6 @@
 public class Solution {
     public int MaxArea(int h, int w, int[] horizontalCuts, int[] verticalCuts) 
-    {
-        Array.Sort(horizontalCuts);
-        Array.Sort(verticalCuts);
-        
+    {        
         //long
         long maxHeight = GetMax(h, horizontalCuts);
         long maxWidth = GetMax(w, verticalCuts);
