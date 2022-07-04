@@ -1,27 +1,32 @@
 //[1,3,2,2,1]
 //[1,2,87,87,87,2,1]
-public class Solution {
-    public int Candy(int[] ratings) {
-        
+public class Solution 
+{
+    public int Candy(int[] ratings) 
+    {        
         if (ratings.Length <=1) return 1;
         
-        int[] candy = new int[ratings.Length];
-        candy[0] = 1;
+        int[] candies = new int[ratings.Length];
+        
+        //In 1st pass give at least 1 candy to everyone; 1 more if the rating is higher than the prev
+        candies[0] = 1;// at least 1
         for (int i = 1; i < ratings.Length; i++)
         {
-            candy[i] = ratings[i] > ratings[i - 1] ? 
-                            candy[i - 1] + 1 :
-                            1;
+            candies[i] = ratings[i] > ratings[i - 1] ? 
+                            candies[i - 1] + 1 :
+                            1; // at least 1
         }
         
-        for (int i = candy.Length - 1; i > 0; i--)
+        //In this pass (from end), allocate 1 more candy if needed to satisfy rule:2 
+        //example case: [1,2,87,87,87,2,1]
+        for (int i = candies.Length - 1; i > 0; i--)
         {
-            if(ratings[i - 1] > ratings[i] && candy[i - 1] <= candy[i])
+            if(ratings[i - 1] > ratings[i] && candies[i - 1] <= candies[i])
             {
-                candy[i - 1] = candy[i] + 1;
+                candies[i - 1] = candies[i] + 1;
             }
         }
         
-        return candy.Sum(c => c);
+        return candies.Sum();
     }
 }
