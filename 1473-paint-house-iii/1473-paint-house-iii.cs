@@ -36,8 +36,7 @@ public class Solution {
             int newNeighborCount = neighborCount + (prevColor == currentColor ? 0 : 1);
             //NOTE: currentColor - 1
             //NOTE: Don't add the current cost
-            int currentCost = FindMinCost (houses, cost, target, houseIndex + 1, currentColor, newNeighborCount);
-            minCost = Math.Min(minCost, currentCost);
+            minCost = FindMinCost (houses, cost, target, houseIndex + 1, currentColor, newNeighborCount);
         }
         else
         {
