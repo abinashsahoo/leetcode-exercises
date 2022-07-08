@@ -44,6 +44,7 @@ class Solution {
     }
     
     public int minCost(int[] houses, int[][] cost, int m, int n, int target) {
+        memo = new Integer[houses.length][houses.length][n + 1];
         int answer = findMinCost(houses, cost, target, 0, 0, 0);
         // Return -1 if the answer is MAX_COST as it implies no answer possible
         return answer == MAX_COST ? -1 : answer;
