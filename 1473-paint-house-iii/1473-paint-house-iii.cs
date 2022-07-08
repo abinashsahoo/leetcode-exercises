@@ -1,11 +1,11 @@
 public class Solution {
     
-    int?[,,] memo = null;
+    int[,,] memo = null;
     const int MaxCost = (int)1e6 + 1;//Maximum cost possible plus 1
     
     public int MinCost(int[] houses, int[][] cost, int m, int n, int target) 
     {   
-        memo = new int?[houses.Length, houses.Length, n + 1];
+        memo = new int[houses.Length, houses.Length, n + 1];
         var result = FindMinCost (houses, cost, target, 0, 0, 0);
         return result == MaxCost ? -1 : result;
     }
@@ -22,9 +22,9 @@ public class Solution {
             return MaxCost;
         }        
         
-        if(memo[houseIndex, neighborCount, prevColor] != null)
+        if(memo[houseIndex, neighborCount, prevColor] != 0)
         {            
-            return (int)memo[houseIndex, neighborCount, prevColor];
+            return memo[houseIndex, neighborCount, prevColor];
         }
         
         int minCost = MaxCost;
