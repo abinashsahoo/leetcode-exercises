@@ -1,7 +1,38 @@
 
 public class Solution {
     
-    public int MaxResult(int[] nums, int k) {
+    // Monotonic increasing queue; Deque replacement
+    public int MaxResult(int[] nums, int k)
+    {
+        int[] scores = new int[nums.Length];
+        scores[0] = nums[0];
+        LinkedList<int> q = new LinkedList<int>();
+        q.AddLast(0);
+
+        for (int i = 1; i < nums.Length; i++)
+        {
+            // pop the old index
+            while (i - q.First.Value > k)
+            {
+                q.RemoveFirst();
+            }
+
+            scores[i] = scores[q.First.Value] + nums[i];
+
+            while (q.Count > 0 && scores[i] >= scores[q.Last.Value])
+            {
+                q.RemoveLast();
+            }
+
+            q.AddLast(i);
+        }
+
+        return scores[nums.Length - 1];
+    }
+    
+    //Deque Replacement
+    public int MaxResultDeque(int[] nums, int k) 
+    {
         if (nums.Length == 0) return 0;
         
         var q = new List<int>();
