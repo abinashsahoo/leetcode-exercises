@@ -14,6 +14,7 @@ public class Solution {
         
         int side = perimeter/4;
         
+        //NOTE: Got TLE without Sort
         //Reverse sort the matchsticks because we want to consider the biggest one first.
         Array.Sort(matchsticks, (a, b) => b.CompareTo(a));
         
