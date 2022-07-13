@@ -11,6 +11,10 @@
  *     }
  * }
  */
+// TC: O(N)
+// SC: O(N)
+//Space complexity = O( max number of nodes on a level), for a full and complete binary //tree(worst case) last level which has all the leaf nodes will have the max number of nodes.
+//Number of leaf nodes is given by (n+1)/2, so ignoring the constants makes the space //complexity O(N)
 public class Solution {
     public IList<IList<int>> LevelOrder(TreeNode root) {        
         var result = new List<IList<int>>();
@@ -28,12 +32,11 @@ public class Solution {
                 level.Add(node.val);
                 
                 if(node.left != null) queue.Enqueue(node.left);
-                if(node.right != null) queue.Enqueue(node.right);                
+                if(node.right != null) queue.Enqueue(node.right); 
             }
             
             result.Add(level);
         }
-        
         return result;
     }
 }
