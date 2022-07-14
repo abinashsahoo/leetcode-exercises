@@ -17,6 +17,44 @@
 //Unique value??
 
 public class Solution {
+    int preorderRootIndex = 0;    
+    public TreeNode BuildTree(int[] preorder, int[] inorder) {        
+        return BuildTree(preorder, inorder, 0, inorder.Length - 1);
+    }
+    
+    private TreeNode BuildTree(int[] preorder, int[] inorder, int leftIndex, int rightIndex) {
+        if(leftIndex > rightIndex)
+        {
+            return null;
+        }
+                
+        int root = preorder[preorderRootIndex];
+        var node = new TreeNode { val = root };
+        
+        int rootIndex = -1;
+        for (int i = leftIndex; i <= rightIndex; i++)
+        {
+            if (inorder[i] == root)
+            {
+                rootIndex = i;
+            }
+        }
+        
+        //Console.WriteLine($"Left: {leftIndex} to {rootIndex - 1}");
+        if (leftIndex <= rootIndex - 1)
+            ++preorderRootIndex;
+        node.left = BuildTree(preorder, inorder, leftIndex, rootIndex - 1);
+        
+        //Console.WriteLine($"Right: {rootIndex + 1} to {rightIndex}");
+        if (rootIndex + 1 <= rightIndex)
+            ++preorderRootIndex;
+        node.right = BuildTree(preorder, inorder, rootIndex + 1, rightIndex);
+        
+        return node;
+    }
+}
+
+public class Solution2 {
     public TreeNode BuildTree(int[] preorder, int[] inorder) {        
         return BuildTree(preorder, inorder, 0, 0, inorder.Length - 1);
     }
@@ -40,7 +78,7 @@ public class Solution {
         }
         
         node.left = BuildTree(preorder, inorder, preorderStart + 1, inorderStart, rootIndex - 1);
-        node.right = BuildTree(preorder, inorder, preorderStart + rootIndex - inorderStart + 1, rootIndex + 1, inorderEnd);
+        node.right = BuildTree(preorder, inorder, preorderStart + rootIndex - inorderStart + 1, rootIndex + 1, inorderEnd);//NOTE: How to calculate preorderStart
         
         return node;
     }
