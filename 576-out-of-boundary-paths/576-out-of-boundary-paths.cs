@@ -20,12 +20,26 @@ public class Solution {
             return memo[startRow][startColumn][maxMove];
         }
         
-        int paths = FindPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo) % MOD;
-        paths = (paths + FindPaths(m, n, maxMove - 1, startRow, startColumn + 1, memo)) % MOD;
-        paths = (paths + FindPaths(m, n, maxMove - 1, startRow + 1, startColumn, memo)) % MOD;
-        paths = (paths + FindPaths(m, n, maxMove - 1, startRow, startColumn - 1, memo)) % MOD;
+        // int paths = FindPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo) % MOD;
+        // paths = (paths + FindPaths(m, n, maxMove - 1, startRow, startColumn + 1, memo)) % MOD;
+        // paths = (paths + FindPaths(m, n, maxMove - 1, startRow + 1, startColumn, memo)) % MOD;
+        // paths = (paths + FindPaths(m, n, maxMove - 1, startRow, startColumn - 1, memo)) % MOD;
+        //memo[startRow][startColumn][maxMove] = paths % MOD;
         
-        memo[startRow][startColumn][maxMove] = paths % MOD;
+        // int pathsUp = FindPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo) % MOD;
+        // int pathsRight = FindPaths(m, n, maxMove - 1, startRow, startColumn + 1, memo) % MOD;
+        // int pathsDown = FindPaths(m, n, maxMove - 1, startRow + 1, startColumn, memo) % MOD;
+        // int pathsLeft = FindPaths(m, n, maxMove - 1, startRow, startColumn - 1, memo) % MOD;
+        // memo[startRow][startColumn][maxMove] = (pathsUp + pathsRight + pathsDown + pathsLeft) % MOD;
+        
+        int pathsUp = FindPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo) % MOD;
+        int pathsRight = FindPaths(m, n, maxMove - 1, startRow, startColumn + 1, memo) % MOD;
+        int pathsDown = FindPaths(m, n, maxMove - 1, startRow + 1, startColumn, memo) % MOD;
+        int pathsLeft = FindPaths(m, n, maxMove - 1, startRow, startColumn - 1, memo) % MOD;
+        int paths1 = (pathsUp + pathsRight)%MOD;
+        int paths2 = (pathsDown + pathsLeft)%MOD;
+        memo[startRow][startColumn][maxMove] = (paths1 + paths2) % MOD;
+        
         return memo[startRow][startColumn][maxMove];
     }
     
