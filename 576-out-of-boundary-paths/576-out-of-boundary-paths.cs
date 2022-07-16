@@ -20,7 +20,7 @@ public class Solution {
             return memo[startRow][startColumn][maxMove];
         }
         
-        int paths = FindPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo);
+        int paths = FindPaths(m, n, maxMove - 1, startRow - 1, startColumn, memo) % MOD;
         paths = (paths + FindPaths(m, n, maxMove - 1, startRow, startColumn + 1, memo)) % MOD;
         paths = (paths + FindPaths(m, n, maxMove - 1, startRow + 1, startColumn, memo)) % MOD;
         paths = (paths + FindPaths(m, n, maxMove - 1, startRow, startColumn - 1, memo)) % MOD;
