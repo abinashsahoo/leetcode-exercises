@@ -20,18 +20,13 @@ public class Solution {
             else
             {
                 answer = Math.Max(answer, j - i);
-                //set.Remove(s[j]);
-                //set.Add(s[j]);
                 while (s[i] != s[j])
                 {
                     set.Remove(s[i]);
                     i++;   
-                }
-                
+                }                
                 i++;
                 j++;
-                
-               // Console.WriteLine($"i ={i}, j = {j}");
             }
         }
         
