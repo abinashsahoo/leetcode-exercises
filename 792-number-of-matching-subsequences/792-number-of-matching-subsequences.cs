@@ -1,6 +1,54 @@
 public class Solution {
     public int NumMatchingSubseq(string s, string[] words) {
         int answer = 0;
+        var dic = new Dictionary<char, List<(int, int)>>();// This solution stores index of the word, instead of the words itself
+        for (int i = 0; i < words.Length; i++)
+        {
+            AddItem(dic, words, i, 0);
+        }
+        
+        foreach (var c in s)
+        {
+            if(!dic.ContainsKey(c)) continue;
+            
+            var oldList = dic[c];
+            dic[c] = new List<(int, int)>();
+            
+            foreach (var (wordIndex, i) in oldList)
+            {
+                int charIndex = i + 1; //Can't modify i, that's why taking another variable
+                var word = words[wordIndex];
+                if(word.Length == charIndex)
+                {
+                    answer++;
+                }
+                else
+                {
+                    AddItem(dic, words, wordIndex, charIndex);
+                }
+            }
+        }
+        return answer;
+    }
+    
+    private void AddItem(Dictionary<char, List<(int, int)>> dic, string[] words, int wordIndex, int charIndex)
+    {
+        var word = words[wordIndex];   
+        var c = word[charIndex];
+        if(dic.ContainsKey(c))
+        {
+            dic[c].Add((wordIndex, charIndex));
+        }
+        else
+        {
+            dic.Add(c, new List<(int, int)>{ (wordIndex, charIndex) });
+        }
+    }
+}
+
+public class Solution3 {
+    public int NumMatchingSubseq(string s, string[] words) {
+        int answer = 0;
         var dic = new Dictionary<char, List<(string, int)>>();
         foreach (var word in words)
         {
@@ -16,7 +64,7 @@ public class Solution {
             
             foreach (var (word, i) in oldList)
             {
-                int index = i + 1;
+                int index = i + 1; //Can't modify i, that's why taking another variable
                 if(word.Length == index)
                 {
                     answer++;
