@@ -9,7 +9,44 @@
  *     }
  * }
  */
-public class Solution {
+public class Solution {    
+    public ListNode ReverseBetween(ListNode head, int left, int right) {        
+        var rightNext = Find(head, right + 1);
+        var previousNode = Find(head, left - 1);
+        
+        var newHead = rightNext;
+        var currentNode = previousNode == null ? head : previousNode.next;  
+        
+        while(currentNode != rightNext) {
+            var next = currentNode.next;
+            currentNode.next = newHead;
+            newHead = currentNode;
+            currentNode = next;
+        }
+        
+        if(previousNode != null) {            
+            previousNode.next = newHead;
+        }
+        else {
+            head = newHead;            
+        }
+        
+        return head;
+    }
+    
+    public ListNode Find(ListNode head, int position) {
+        if(position < 1) return null;
+        var result = head;
+        for(int i = 1; i < position; i++) {
+            result = result.next;
+            if(result == null)
+                return result;
+        }
+        return result;
+    }
+}
+
+public class Solution1 {
     public ListNode ReverseBetween(ListNode head, int left, int right) {
         if (head == null) {
             return null;
