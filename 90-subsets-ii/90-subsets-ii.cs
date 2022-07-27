@@ -1,3 +1,5 @@
+//Time Complexity: O(n.2^n)
+//Space Complexity: O(n.2^n) -> 2^n subsets in Hashset; Each subset length is n. Response list should not be considered, otherwise that's also take up same space.
 public class Solution {
     public IList<IList<int>> SubsetsWithDup(int[] nums) {
         Array.Sort(nums); // This would generate sorted subset and would help in determining duplicates
