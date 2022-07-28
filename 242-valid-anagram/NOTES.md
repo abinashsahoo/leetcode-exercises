@@ -1,1 +1,1 @@
-​
+return **Enumerable**.SequenceEqual(sArray, tArray);
