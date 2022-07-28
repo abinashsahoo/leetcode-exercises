@@ -1,17 +1,14 @@
 public class Solution {
     public string LongestPalindrome(string s) {
-
         string result = string.Empty;
         for (int left = 0; left < s.Length; left++)
         {
-            int right = left;//it should start at "left"
-            while (right < s.Length)
+            for (int right = left; right < s.Length; right++)//it should start at "left"
             {
                 if (IsPalindrome(s, left, right) && result.Length < right - left + 1)
                 {                
                     result = s.Substring(left, right - left + 1);                    
                 }
-                right++;
             }            
         }
         return result;
