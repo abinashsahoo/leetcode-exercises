@@ -1,5 +1,10 @@
-public class Solution {
+public class Solution1 {
     public bool IsAnagram(string s, string t) {
+        if(s.Length != t.Length)
+        {
+            return false;
+        }
+        
         var dictionary = new Dictionary<char, int>();
         foreach (var c in s)
         {
@@ -26,5 +31,22 @@ public class Solution {
         }
         
         return !dictionary.Values.Any(v => v > 0);
+    }
+}
+
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        if(s.Length != t.Length)
+        {
+            return false;
+        }
+        
+        var sArray = s.ToCharArray();
+        var tArray = t.ToCharArray();
+        
+        Array.Sort(sArray);
+        Array.Sort(tArray);
+        
+        return Enumerable.SequenceEqual(sArray, tArray); //NOTE
     }
 }
