@@ -5,9 +5,10 @@ public class Solution {
         {
             for (int right = left; right < s.Length; right++)//it should start at "left"
             {
-                if (IsPalindrome(s, left, right) && result.Length < right - left + 1)
+                int substringLength = right - left + 1;
+                if (IsPalindrome(s, left, right) && result.Length < substringLength)
                 {                
-                    result = s.Substring(left, right - left + 1);                    
+                    result = s.Substring(left, substringLength);                    
                 }
             }            
         }
