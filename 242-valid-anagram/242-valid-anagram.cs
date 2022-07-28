@@ -19,7 +19,7 @@ public class Solution {
         
         foreach(var c in t)
         {
-            if (!dictionary.ContainsKey(c) || dictionary[c] == 0) //<= 0 not really required because we are reducing 1 by 1
+            if (!dictionary.ContainsKey(c))
             {
                 return false;
             }
@@ -27,9 +27,14 @@ public class Solution {
             {
                 dictionary[c]--;
             }
+            
+            if(dictionary[c] == 0)
+            {
+                dictionary.Remove(c);
+            }
         }
         
-        return !dictionary.Values.Any(v => v > 0);
+        return !dictionary.Any();
     }
 }
 
