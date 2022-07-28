@@ -1,4 +1,10 @@
-public class Solution1 {
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+        return s.OrderBy(c => c).SequenceEqual(t.OrderBy(c => c));
+    }
+}
+
+public class Solution2 {
     public bool IsAnagram(string s, string t) {
         if(s.Length != t.Length)
         {
@@ -34,7 +40,7 @@ public class Solution1 {
     }
 }
 
-public class Solution {
+public class Solution1 {
     public bool IsAnagram(string s, string t) {
         if(s.Length != t.Length)
         {
