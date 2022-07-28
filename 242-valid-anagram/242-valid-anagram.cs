@@ -1,10 +1,10 @@
-public class Solution {
+public class Solution2 {
     public bool IsAnagram(string s, string t) {
         return s.OrderBy(c => c).SequenceEqual(t.OrderBy(c => c));
     }
 }
 
-public class Solution2 {
+public class Solution {
     public bool IsAnagram(string s, string t) {
         if(s.Length != t.Length)
         {
@@ -12,17 +12,10 @@ public class Solution2 {
         }
         
         var dictionary = new Dictionary<char, int>();
-        foreach (var c in s)
+        foreach(var i in s)
         {
-            if (!dictionary.ContainsKey(c))
-            {
-                dictionary.Add(c, 1);
-            }
-            else
-            {
-                dictionary[c]++;
-            }
-        }
+            dictionary[i] = dictionary.ContainsKey(i) ? (dictionary[i] + 1) : 1;
+        } 
         
         foreach(var c in t)
         {
