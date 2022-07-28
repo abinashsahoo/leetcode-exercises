@@ -47,6 +47,7 @@ public class Solution {
         Array.Sort(sArray);
         Array.Sort(tArray);
         
-        return Enumerable.SequenceEqual(sArray, tArray); //NOTE
+        //return Enumerable.SequenceEqual(sArray, tArray); //NOTE
+        return sArray.SequenceEqual(tArray);
     }
 }
