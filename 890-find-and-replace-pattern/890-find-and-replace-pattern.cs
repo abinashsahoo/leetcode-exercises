@@ -1,4 +1,44 @@
+//Test case: ["ef","fq","ao","at","lx"], pattern = "ya"
 public class Solution {
+    public IList<string> FindAndReplacePattern(string[] words, string pattern) {
+        var result = new List<string>();
+        foreach (var word in words)
+        {
+            if (IsMatch(word, pattern))
+            {
+               result.Add(word);
+            }
+        }
+        return result;
+    }
+    
+    private bool IsMatch(string word, string pattern)
+    {
+        var dict = new Dictionary<char, char>();
+        
+        for (int i = 0; i < pattern.Length; i++)
+        {
+            char p = pattern[i];
+            char w = word[i];
+
+            if(!dict.ContainsKey(p))
+            {
+                dict[p] = w;
+            }
+            else if (dict[p] != w)
+            {
+                return false;
+            }
+        }
+        
+        if(dict.Values.GroupBy(v => v).Any(v => v.Count() > 1)) //If Any duplicate map?
+            return false;
+        else
+            return true;
+    }
+}
+
+public class Solution2 {
     public IList<string> FindAndReplacePattern(string[] words, string pattern) {
         var result = new List<string>();
         foreach (var word in words)
