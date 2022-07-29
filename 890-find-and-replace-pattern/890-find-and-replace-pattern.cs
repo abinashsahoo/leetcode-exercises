@@ -10,6 +10,33 @@ public class Solution {
         }
         return result;
     }
+
+    private bool IsMatch(string word, string pattern)
+    {
+        for (int i = 0; i < pattern.Length; i++)
+        {
+            char p = pattern[i];
+            char w = word[i];
+
+            if (pattern.IndexOf(p) != word.IndexOf(w))
+                return false;
+        }    
+        return true;
+    }
+}
+
+public class Solution4 {
+    public IList<string> FindAndReplacePattern(string[] words, string pattern) {
+        var result = new List<string>();
+        foreach (var word in words)
+        {
+            if (IsMatch(word, pattern))
+            {
+               result.Add(word);
+            }
+        }
+        return result;
+    }
     
     private bool IsMatch(string word, string pattern)
     {
