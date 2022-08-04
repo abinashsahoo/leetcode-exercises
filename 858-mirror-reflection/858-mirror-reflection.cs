@@ -16,6 +16,7 @@ n = the number of light reflection + 1.
 public class Solution {
     public int MirrorReflection(int p, int q) {
         int m = q, n = p;
+        //Divide p,q by 2 until at least one odd.
         while(m % 2 == 0 && n % 2 == 0){
             m /= 2;
             n /= 2;
