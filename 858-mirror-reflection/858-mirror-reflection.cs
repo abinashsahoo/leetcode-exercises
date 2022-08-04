@@ -13,7 +13,32 @@ So, this problem can be transformed into finding m * p = n * q, where
 m = the number of room extension + 1.
 n = the number of light reflection + 1.
 */
-public class Solution {
+public class Solution {   
+    public int MirrorReflection(int p, int q) {
+        int g = gcd(p, q);
+        
+        p /= g;
+        q /= g;
+        
+        if (q % 2 == 0)
+            return 0;
+        
+        if (p % 2 == 0)
+            return 2;
+        else 
+            return 1;
+    }
+     
+    private static int gcd(int a, int b) {
+        while (true) {
+            if ((a = a % b) == 0)
+                return b;
+            
+            (a, b) = (b, a);
+        }
+    }   
+}
+public class Solution2 {
     public int MirrorReflection(int p, int q) {
         int m = q, n = p;
         //Divide p,q by 2 until at least one odd.
