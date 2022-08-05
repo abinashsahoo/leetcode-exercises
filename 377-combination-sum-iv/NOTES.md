@@ -1,0 +1,2 @@
+**top-down**
+As the name suggests, with top-down strategy, we start from the original input, and then we recursively reduce the input into a smaller scale until we reach the levels that we can no longer break down.
