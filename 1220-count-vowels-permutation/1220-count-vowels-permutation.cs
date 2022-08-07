@@ -14,11 +14,11 @@ public class Solution
         for(int i = 2; i <= n; i++)
         {  
             var countTemp = new long[5];            
-            countTemp[0] = count[1];
-            countTemp[1] = (count[0] + count[2]) % mod;
-            countTemp[2] = (count[0] + count[1] + count[3] + count[4]) % mod;
-            countTemp[3] = (count[2] + count[4]) % mod;
-            countTemp[4] = count[0];
+            countTemp[0] = count[1]; // a -> e
+            countTemp[1] = (count[0] + count[2]) % mod; // e -> a/i
+            countTemp[2] = (count[0] + count[1] + count[3] + count[4]) % mod; // i -> a/e/o/u
+            countTemp[3] = (count[2] + count[4]) % mod; // o -> i/u
+            countTemp[4] = count[0]; // u -> a
             count = countTemp;
             
             
