@@ -1,6 +1,18 @@
+public class Solution {
+    public bool IsPalindrome(string s) {
+        string newStr = new string(s.ToLower().Where(c => char.IsLetterOrDigit(c)).ToArray());
+        for (int i = 0; i < newStr.Length/2; i++)
+        {
+            if (newStr[i] != newStr[^(i+1)])//c#8
+                return false;
+        }
+        return true;
+    }
+}
+
 //Testcase: "0P"
 //testCase: ".,"
-public class Solution {
+public class Solution1 {
     public bool IsPalindrome(string s) {
         var lowerStr = s.ToLower();
         int left = 0;
