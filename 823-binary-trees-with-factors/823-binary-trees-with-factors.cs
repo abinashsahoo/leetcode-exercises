@@ -1,5 +1,35 @@
 public class Solution {
     public int NumFactoredBinaryTrees(int[] arr) {
+        int mod = (int)1e9 + 7;
+        
+        Array.Sort(arr);
+        
+        long count = 1;
+        Dictionary<int, long> dict = new();
+        dict.Add(arr[0], count);
+        
+        for(int i = 1; i < arr.Length; i++)
+        {
+            count = 1;
+            
+            foreach(var k in dict.Keys)
+            {
+                if(arr[i] % k == 0 && dict.ContainsKey(arr[i] / k))
+                    count += (dict[k] * dict[arr[i] / k]);
+            }
+            dict.Add(arr[i], count);
+        }
+        
+        long sum = 0;
+        foreach(var v in dict.Values)
+            sum = (sum + v) % mod;
+        
+        return (int)sum;
+    }
+}
+
+public class Solution1 {
+    public int NumFactoredBinaryTrees(int[] arr) {
         long response = 0;
         int mod = (int)1e9 + 7;
         
