@@ -1,1 +1,2 @@
-​
+During the BFS traversal, we use a queue data structure to keep track of the next nodes to visit. At any given moment, the queue would hold no more two levels of nodes. For a binary tree, the maximum number of nodes at a level would be (N+1)/2 which is also the number of leafs in a full binary tree. As a result, in the worst case, our queue would consume at most
+2 * (N+1)/2 =O(N) space.
