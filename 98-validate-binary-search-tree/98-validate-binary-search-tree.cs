@@ -12,8 +12,39 @@
  * }
  */
 
-
 public class Solution {
+    int? prevNumber = null;
+    public bool IsValidBST(TreeNode root) {
+        if (root == null) 
+        {
+            return true;
+        }
+            
+        return TraverseInOrder(root);
+    }
+    
+    public bool TraverseInOrder(TreeNode root) {
+        if (root == null) 
+        {
+            return true;
+        }
+        
+        bool flag = TraverseInOrder(root.left);
+        if (prevNumber >= root.val) 
+        {
+            flag = false;
+        }
+        else
+        {
+            prevNumber = root.val;
+        }
+        
+        return flag && TraverseInOrder(root.right);
+    }
+}
+
+//InOrder and check if the array is sorted
+public class Solution4 {
     public bool IsValidBST(TreeNode root) {
         if (root == null) 
         {
