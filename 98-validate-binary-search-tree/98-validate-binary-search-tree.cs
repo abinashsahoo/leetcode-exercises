@@ -13,7 +13,7 @@
  */
 
 public class Solution {
-    int? prevNumber = null;
+    int? prevNumber = null; //NOTE: If it was passed in recursively, did not work ex, [1, 1]
     public bool IsValidBST(TreeNode root) {
         if (root == null) 
         {
