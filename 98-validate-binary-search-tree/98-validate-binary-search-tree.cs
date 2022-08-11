@@ -11,15 +11,36 @@
  *     }
  * }
  */
-
+//https://leetcode.com/problems/validate-binary-search-tree/discuss/32112/Learn-one-iterative-inorder-traversal-apply-it-to-multiple-tree-questions-(Java-Solution)
+//Iterative InOrder
 public class Solution {
+    public bool IsValidBST(TreeNode root) 
+    {
+       if (root == null) return true;
+       var stack = new Stack<TreeNode>();
+       TreeNode pre = null;
+       while (root != null || stack.Count > 0) 
+       {
+          while (root != null) 
+          {
+             stack.Push(root);
+             root = root.left;
+          }
+          root = stack.Pop();
+          if(pre != null && root.val <= pre.val) 
+          {
+              return false;
+          }
+          pre = root;
+          root = root.right;
+       }
+       return true;
+    }
+}
+
+public class Solution5 {
     int? prevNumber = null; //NOTE: If it was passed in recursively, did not work ex, [1, 1]
-    public bool IsValidBST(TreeNode root) {
-        if (root == null) 
-        {
-            return true;
-        }
-            
+    public bool IsValidBST(TreeNode root) { 
         return TraverseInOrder(root);
     }
     
