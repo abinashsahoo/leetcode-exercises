@@ -10,25 +10,23 @@
 
 public class Solution {
     public TreeNode LowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        Console.WriteLine($"root = {root?.val}, p = {p?.val}, q = {q?.val}");
-        //The number of nodes in the tree is in the range [2 , 10^5]
-        // if (root == null)
-        // {
-        //     return null;
-        // }
+        while (root != null)
+        {
+            if (p.val > root.val &&  q.val > root.val)
+            {
+                root = root.right;
+            }
+            else if (p.val < root.val &&  q.val < root.val)
+            {
+                root = root.left;
+            }
+            else
+            {
+                return root;
+            }            
+        }
         
-        if (p.val > root.val &&  q.val > root.val)
-        {
-            return LowestCommonAncestor(root.right, p, q);;
-        }
-        else if (p.val < root.val &&  q.val < root.val)
-        {
-            return LowestCommonAncestor(root.left, p, q);
-        }
-        else
-        {
-            return root;
-        }
+        return null;
     }
 }
 
