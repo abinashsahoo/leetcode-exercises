@@ -49,11 +49,11 @@ public class Solution {
             for (char c = 'a'; c <= 'z'; c++)
             {
                 //if(c != arr[i])//Won't word, because arr[i] is already modified
-                //if(c != word[i])
-                //{
+                if(c != word[i])
+                {
                     arr[i] = c;
                     yield return new string(arr);
-               // }
+                }
             }
         }
     }
