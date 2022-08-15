@@ -2,17 +2,38 @@ public class Solution {
     public int RomanToInt(string s) {
         var dict = new Dictionary<char, int>();
         dict.Add('I', 1);
-        //dict.Add('IV', 4);
         dict.Add('V', 5);
-        //dict.Add('IX', 9);
         dict.Add('X', 10);
-        //dict.Add('XL', 40);
         dict.Add('L', 50);
-        //dict.Add('XC', 90);
         dict.Add('C', 100);
-        //dict.Add('CD', 400);
         dict.Add('D', 500);
-        //dict.Add('CM', 900);
+        dict.Add('M', 1000);
+        
+        int result = 0;
+        int previous = 1000;//Max
+        foreach (char c in s)
+        {
+            int current = dict[c];
+            result += current;
+            if (previous < current)
+            {
+                result -= 2 * previous; 
+            }            
+            previous = current;
+        }
+        return result;
+    }
+}
+
+public class Solution1 {
+    public int RomanToInt(string s) {
+        var dict = new Dictionary<char, int>();
+        dict.Add('I', 1);
+        dict.Add('V', 5);
+        dict.Add('X', 10);
+        dict.Add('L', 50);
+        dict.Add('C', 100);
+        dict.Add('D', 500);
         dict.Add('M', 1000);
         
         int result = 0;
