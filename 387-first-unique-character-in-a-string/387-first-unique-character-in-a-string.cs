@@ -1,7 +1,27 @@
-//Space complexity : O(1) because English alphabet contains 26 letters.
+// Time Complexity: 26*O(n) complexity so we can considered O(n)
+public class Solution {
+    public int FirstUniqChar(string s) {
+        int result = int.MaxValue;
+        for (char c = 'a'; c <= 'z'; c++)
+        {
+            int index = s.IndexOf(c);
+           if(index == s.LastIndexOf(c) && index > -1 && index < result)
+                result = index;
+        }
+        
+        // for (int i = 0; i < s.Length; i++)
+        // {
+        //     char c = s[i];
+        //     if(s.IndexOf(c) == s.LastIndexOf(c))
+        //         return i;
+        // }
+        //return -1;
+        return result == int.MaxValue ? -1 : result;
+    }
+}
 
 //Space complexity : O(1) because English alphabet contains 26 letters.
-public class Solution {
+public class Solution2 {
     public int FirstUniqChar(string s) {        
         Dictionary<char, int> set = new();
         foreach (char c in s)
@@ -18,6 +38,7 @@ public class Solution {
     }
 }
 
+//Space complexity : O(1) because English alphabet contains 26 letters.
 public class Solution1 {
     public int FirstUniqChar(string s) {        
         Dictionary<char, (int, int)> set = new();
