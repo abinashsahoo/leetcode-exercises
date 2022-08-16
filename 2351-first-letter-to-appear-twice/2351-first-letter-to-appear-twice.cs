@@ -1,5 +1,19 @@
 public class Solution {
     public char RepeatedCharacter(string s) {
+        HashSet<char> set = new();
+        foreach (char c in s)
+        {
+            if(set.Contains(c))
+                return c;
+            else
+                set.Add(c);
+        }
+        return ' ';//s[0];//'\0'
+    }
+}
+
+public class Solution1 {
+    public char RepeatedCharacter(string s) {
         int resultIndex = int.MaxValue;
         Dictionary<char, (int, int)> set = new();
         for (int i = 0; i < s.Length; i++)
@@ -14,18 +28,10 @@ public class Solution {
                 set[s[i]] = (index, count + 1);
             }
             
-            var (index1, count1) = set[s[i]];
+            var (index1, count1) = set[s[i]]; //NOTE: Could not use (index, count) variable names here!!
             if(count1 == 2 && resultIndex > index1)
                 return s[index1];
-                //resultIndex = index1;
         }
-        
-        // int resultIndex = int.MaxValue;
-        // foreach (var (index, count) in set.Values)
-        // {
-        //     if(count == 2 && resultIndex > index)
-        //         resultIndex = index;
-        // }
-        return s[resultIndex];
+        return s[0];
     }
 }
