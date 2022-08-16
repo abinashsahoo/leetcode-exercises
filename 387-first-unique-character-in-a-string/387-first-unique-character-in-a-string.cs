@@ -1,4 +1,24 @@
+//Space complexity : O(1) because English alphabet contains 26 letters.
+
+//Space complexity : O(1) because English alphabet contains 26 letters.
 public class Solution {
+    public int FirstUniqChar(string s) {        
+        Dictionary<char, int> set = new();
+        foreach (char c in s)
+        {
+            set[c] = set.ContainsKey(c) ? set[c] + 1 : 1;
+        }
+        
+        for (int i = 0; i < s.Length; i++)
+        {
+            if(set[s[i]] == 1)
+                return i;
+        }
+        return -1;
+    }
+}
+
+public class Solution1 {
     public int FirstUniqChar(string s) {        
         Dictionary<char, (int, int)> set = new();
         for (int i = 0; i < s.Length; i++)
