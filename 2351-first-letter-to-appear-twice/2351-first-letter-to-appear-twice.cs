@@ -1,12 +1,12 @@
 public class Solution {
     public char RepeatedCharacter(string s) {
-        HashSet<char> set = new();
+        HashSet<char> seen = new();
         foreach (char c in s)
         {
-            if(set.Contains(c))
+            if(seen.Contains(c))
                 return c;
             else
-                set.Add(c);
+                seen.Add(c);
         }
         return ' ';//s[0];//'\0'
     }
