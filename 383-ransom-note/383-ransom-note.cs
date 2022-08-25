@@ -9,7 +9,7 @@ public class Solution {
         foreach (char c in ransomNote)
         {
             map[c - 'a']--;
-            if (map[c - 'a'] < 0)
+            if (map[c - 'a'] < 0) //NOT <= because -- is happening before
             {
                 return false;
             }
