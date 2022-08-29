@@ -1,4 +1,5 @@
-public class Solution {
+//DFS
+public class Solution1 {
     public int NumIslands(char[][] grid) {
        int count = 0;
         
@@ -32,7 +33,7 @@ public class Solution {
 }
 
 //BFS
-public class Solution1 {
+public class Solution {
     public int NumIslands(char[][] grid) {
         int result = 0;
         int[] dx = new int[] { 1, -1, 0, 0 },
