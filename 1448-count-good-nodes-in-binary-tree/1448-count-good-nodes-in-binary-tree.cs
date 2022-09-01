@@ -11,7 +11,34 @@
  *     }
  * }
  */
+
 public class Solution {
+    public int GoodNodes(TreeNode root) {
+        int result = 0;
+        Stack<(TreeNode, int)> stack = new();
+        stack.Push((root, root.val));
+        
+        while (stack.Count > 0)
+        {
+            var (currNode, currMax) = stack.Pop();
+            if (currNode.val >= currMax)
+            {
+                result++;
+                currMax = currNode.val;
+            }
+            
+            if (currNode.left != null)
+                stack.Push((currNode.left, currMax));
+            
+            if (currNode.right != null)
+                stack.Push((currNode.right, currMax));
+        }
+        
+        return result;
+    }
+}
+
+public class Solution1 {
     public int GoodNodes(TreeNode root) {
         return Dfs(root, root.val);
     }
