@@ -13,11 +13,7 @@
  */
 public class Solution {
     public int GoodNodes(TreeNode root) {
-        int result = 0;
-        if (root == null) return result;
-        
-        result += Dfs(root, root.val);
-        return result;
+        return Dfs(root, root.val);
     }
     
     private int Dfs(TreeNode root, int currentMax)
