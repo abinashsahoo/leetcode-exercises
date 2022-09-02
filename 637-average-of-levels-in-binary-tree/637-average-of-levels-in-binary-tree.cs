@@ -21,16 +21,19 @@ public class Solution {
         
         while (queue.Count > 0)
         {
-            int count = queue.Count;
-            long sum = 0;
-            for (int i = 0; i < count; i++)
+            int size = queue.Count;
+            double sum = 0;
+            for (int i = 0; i < size; i++)
             {
                 var node = queue.Dequeue();
                 sum += node.val;
-                if(node.left != null) queue.Enqueue(node.left);
-                if(node.right != null) queue.Enqueue(node.right);  
+                
+                if(node.left != null) 
+                    queue.Enqueue(node.left);
+                if(node.right != null) 
+                    queue.Enqueue(node.right);  
             }
-            result.Add(sum/(count*1.0));
+            result.Add(sum/size);
         }
         return result;
     }
