@@ -14,6 +14,25 @@
 
 public class Solution {
     public string Tree2str(TreeNode root) {
+        if (root == null)
+            return "";
+        
+        if (root.left == null && root.right == null)
+        {
+            return root.val.ToString(); //OR, return root.val + "";
+        }
+        
+        string output = $"{root.val}({Tree2str(root.left)})";              
+        if (root.right != null)
+        {            
+            output += $"({Tree2str(root.right)})"; 
+        }
+        return output;
+    }
+}
+
+public class Solution3 {
+    public string Tree2str(TreeNode root) {
         StringBuilder sb = new();
         Dfs(root, sb);
         return sb.ToString();
