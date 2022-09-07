@@ -11,7 +11,42 @@
  *     }
  * }
  */
+
 public class Solution {
+    public string Tree2str(TreeNode root) {
+        StringBuilder sb = new();
+        Dfs(root, sb);
+        return sb.ToString();
+    }
+    
+    private void Dfs(TreeNode root, StringBuilder sb)
+    {
+        if (root == null)
+            return;
+        
+        if (root.left == null && root.right == null)
+        {
+            sb.Append(root.val);
+            return;
+        }
+        
+        sb.Append(root.val);
+        
+        sb.Append("(");
+        Dfs(root.left, sb);
+        sb.Append(")");
+             
+        if (root.right != null)
+        {            
+            sb.Append("(");
+            Dfs(root.right, sb);
+            sb.Append(")");
+        }
+    }
+}
+
+// Looks complex?
+public class Solution2 {
     public string Tree2str(TreeNode root) {
         StringBuilder sb = new();
         Dfs(root, sb);
