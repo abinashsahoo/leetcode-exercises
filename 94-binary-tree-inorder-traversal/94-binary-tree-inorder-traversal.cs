@@ -43,21 +43,19 @@ public class Solution {
         
         while (stack.Count > 0)
         {
-            var currNode = stack.Pop();
-            result.Add(currNode.val);            
-            currNode = currNode.right;
-            
-            TraverseLeft(currNode, stack);
+            var node = stack.Pop();
+            result.Add(node.val);            
+            TraverseLeft(node.right, stack);
         }
         return result;
     }
     
-    private void TraverseLeft(TreeNode currNode, Stack<TreeNode> stack)
+    private void TraverseLeft(TreeNode node, Stack<TreeNode> stack)
     {
-        while (currNode != null)
+        while (node != null)
         {
-            stack.Push(currNode);
-            currNode = currNode.left;
+            stack.Push(node);
+            node = node.left;
         }
     }
 }
