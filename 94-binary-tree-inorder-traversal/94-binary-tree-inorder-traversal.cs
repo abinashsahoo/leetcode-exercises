@@ -12,7 +12,57 @@
  * }
  */
 
+public class Solution2 {
+    public IList<int> InorderTraversal(TreeNode root) {
+        List<int> result = new();
+        Stack<TreeNode> stack = new();
+        
+        TreeNode currNode = root;        
+        while (currNode != null || stack.Count > 0)
+        {
+            while (currNode != null)
+            {
+                stack.Push(currNode);
+                currNode = currNode.left;
+            }
+            
+            currNode = stack.Pop();
+            result.Add(currNode.val);            
+            currNode = currNode.right;            
+        }
+        return result;
+    }
+}
+
 public class Solution {
+    public IList<int> InorderTraversal(TreeNode root) {
+        List<int> result = new();
+        Stack<TreeNode> stack = new();
+        
+        TraverseLeft(root, stack);
+        
+        while (stack.Count > 0)
+        {
+            var currNode = stack.Pop();
+            result.Add(currNode.val);            
+            currNode = currNode.right;
+            
+            TraverseLeft(currNode, stack);
+        }
+        return result;
+    }
+    
+    private void TraverseLeft(TreeNode currNode, Stack<TreeNode> stack)
+    {
+        while (currNode != null)
+        {
+            stack.Push(currNode);
+            currNode = currNode.left;
+        }
+    }
+}
+
+public class Solution1 {
     public IList<int> InorderTraversal(TreeNode root) {
         List<int> result = new();
         if(root == null)
@@ -25,33 +75,3 @@ public class Solution {
         return result;
     }
 }
-
-// public class Solution {
-//     public IList<int> InorderTraversal(TreeNode root) {
-//         List<int> result = new();
-//         if(root == null)
-//         {
-//             return result;
-//         }
-//         Stack<TreeNode> stack = new();
-//         stack.Push(root);
-        
-//         while (stack.Count > 0)
-//         {
-//             var node = stack.Pop();
-            
-//             if (node.left != null)
-//             {
-//                 stack.Push(node.left);
-//             }
-            
-            
-//             if (node.right != null)
-//             {
-//                 stack.Push(node.right);
-//             }
-//             result.Add(node.val);
-//         }
-//         return result;
-//     }
-// }
