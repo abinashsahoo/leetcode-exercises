@@ -5,19 +5,19 @@ public class Solution {
         // Sort in descending order of attack, 
         // If attack is same sort in ascending order of defense
         Array.Sort(properties, (x, y) => (x[0] == y[0]) ? x[1] - y[1] : y[0] - x[0]);
-        
+     
         int maxDefense = 0;
-        for (int i = 0; i < properties.Length; i++)
+        foreach (var p in properties)
         {
             // Compare the current defense with the maximum achieved so far
-            if (properties[i][1] < maxDefense)
+            if (p[1] < maxDefense)
             {
                 weakCount++;
             }
             
-            if (properties[i][1] > maxDefense)
+            if (p[1] > maxDefense)
             {
-                maxDefense = properties[i][1];
+                maxDefense = p[1];
             }
         }
         return weakCount;
