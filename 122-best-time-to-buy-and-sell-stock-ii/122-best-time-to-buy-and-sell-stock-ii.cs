@@ -2,6 +2,8 @@
 // Can we buy and sell on the same day not to incur loss? - Yes
 // So profit can't go negative
 
+// Greedy?
+// Check out: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/discuss/2556523/Faster-than-98C%2B%2BGreedyVery-Easy-to-understand
 class Solution {
     public int MaxProfit(int[] prices) {
         int maxprofit = 0;
