@@ -1,3 +1,5 @@
+//Do I need to buy the stock before selling?
+    
 //using 2 pointer
 public class Solution {
     public int MaxProfit(int[] prices) {
