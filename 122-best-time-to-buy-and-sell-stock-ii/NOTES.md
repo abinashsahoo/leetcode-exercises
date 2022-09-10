@@ -1,1 +1,1 @@
-​
+Brute force approach doesn't always mean easiest approach, just the one that guarantees the right answer even if it's slow.
