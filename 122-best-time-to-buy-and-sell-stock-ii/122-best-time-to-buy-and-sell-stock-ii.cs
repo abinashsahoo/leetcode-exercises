@@ -5,7 +5,15 @@
 // Greedy?
 // Check out: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/discuss/2556523/Faster-than-98C%2B%2BGreedyVery-Easy-to-understand
 class Solution {
+
     public int MaxProfit(int[] prices) {
+        var dp = new int[2] {0, Int32.MinValue};
+        foreach (int price in prices)
+            dp = new int[2] {Math.Max(dp[0], dp[1] + price), Math.Max(dp[1], dp[0] - price)};
+        return dp[0];
+    }
+    
+    public int MaxProfit1(int[] prices) {
         int minPrice = int.MaxValue, profit = 0;
         for(int i = 0; i < prices.Length; i++) 
         {
