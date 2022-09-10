@@ -1,4 +1,44 @@
+//using 2 pointer
 public class Solution {
+    public int MaxProfit(int[] prices) {
+        int left = 0;
+        int right = 1;
+        int maxProfit = 0;
+        while(right < prices.Length)
+        {
+            //if profitable
+            if (prices[right] > prices[left])
+            {
+                maxProfit = Math.Max(maxProfit, prices[right] - prices[left]);
+            }
+            else //Found a new low
+            {
+                left = right; //NOT left++;
+            } 
+            right++;
+        }
+        return maxProfit;
+    }
+    
+    
+//Throught to use 2 pointers min from left and max from right. But where to stop??
+    public int MaxProfit1(int[] prices) {
+        int left = 0;
+        int right = prices.Length - 1;
+        int minLeft = int.MaxValue;
+        int maxRight = -1;
+        while (left <= right)
+        {
+            minLeft = Math.Min(minLeft, prices[left]);
+            maxRight = Math.Max(maxRight, prices[right]);
+            left++;
+            right--;
+        }
+        return 0;
+    }
+}
+
+public class Solution3 {
     public int MaxProfit(int[] prices) {
         int minLeft = prices[0];
         int maxProfit = 0;//int.MinValue; If only 1 item, it'd be 0
@@ -42,23 +82,5 @@ public class Solution2 {
             }
         }
         return maxProfit;
-    }
-}
-
-//Throught to use 2 pointers min from left and max from right. But where to stop??
-public class Solution1 {
-    public int MaxProfit(int[] prices) {
-        int left = 0;
-        int right = prices.Length - 1;
-        int minLeft = int.MaxValue;
-        int maxRight = -1;
-        while (left <= right)
-        {
-            minLeft = Math.Min(minLeft, prices[left]);
-            maxRight = Math.Max(maxRight, prices[right]);
-            left++;
-            right--;
-        }
-        return 0;
     }
 }
