@@ -2,10 +2,23 @@
 // Can we buy and sell on the same day not to incur loss? - Yes
 // So profit can't go negative
 
-// TLE
-public class Solution {
+class Solution {
     public int MaxProfit(int[] prices) {
-        int[,] dp = new int[prices.Length,2];
+        int maxprofit = 0;
+        for (int i = 1; i < prices.Length; i++) {
+            if (prices[i] > prices[i - 1])
+                maxprofit += prices[i] - prices[i - 1];
+        }
+        return maxprofit;
+    }
+}
+
+// Memoization
+// Time: O(2n)
+// Space: O(2n) + Stack O(n)
+public class Solution2 {
+    public int MaxProfit(int[] prices) {
+        int[,] dp = new int[prices.Length,2]; //dp states
         ArrayFill(dp, -1); //Time O(2n)
         return MaxProfit(prices, 0, 1, dp);
     }
@@ -18,11 +31,11 @@ public class Solution {
             return dp[index, buy];
         
         int profit = 0;
-        if (buy == 1)
+        if (buy == 1) //allowed to buy
         {
             profit = Math.Max(-prices[index] + MaxProfit(prices, index + 1, 0, dp), 0 + MaxProfit(prices, index + 1, 1, dp));
         }
-        else //sell
+        else //allowed to sell
         {
             profit = Math.Max(prices[index] + MaxProfit(prices, index + 1, 1, dp), 0 + MaxProfit(prices, index + 1, 0, dp));
         }
@@ -55,11 +68,11 @@ public class Solution1 {
             return 0;
         
         int profit = 0;
-        if (buy == 1)
+        if (buy == 1)//allowed to buy
         {
             profit = Math.Max(-prices[index] + MaxProfit(prices, index + 1, 0), 0 + MaxProfit(prices, index + 1, 1));
         }
-        else //sell
+        else //allowed to sell
         {
             profit = Math.Max(prices[index] + MaxProfit(prices, index + 1, 1), 0 + MaxProfit(prices, index + 1, 0));
         }
