@@ -1,4 +1,26 @@
+//Space optimized
 public class Solution {
+    
+    public int MaxProfit(int[] prices) {
+        int[,] dpAfter = new int[2, 3]; //dp states
+        int[,] dpCurrent = dpAfter;
+        for (int i = prices.Length - 1; i >= 0; i--)
+        {
+            for (int k = 1; k <=2; k++)//Starts from 1 to 2
+            {
+                dpCurrent[0,k] = Math.Max(prices[i] + dpAfter[1, k-1], dpAfter[0, k]);
+                dpCurrent[1,k] = Math.Max(-prices[i] + dpAfter[0, k], dpAfter[1, k]);
+
+                dpAfter = dpCurrent;
+            }
+        }
+            
+        return dpCurrent[1,2];
+    }
+}
+
+// Tabulation
+public class SolutionTab {
     
     public int MaxProfit(int[] prices) {
         int[,,] dp = new int[prices.Length + 1, 2, 3]; //dp states
