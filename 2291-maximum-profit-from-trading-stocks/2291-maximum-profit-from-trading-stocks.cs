@@ -1,5 +1,23 @@
-//Memory Optimization
+//Memory Optimization - Clean
 public class Solution {
+    public int MaximumProfit(int[] present, int[] future, int budget) {
+        int[] dp = new int[budget + 1];
+        for (int i = present.Length - 1; i >= 0; i--)
+        {
+            for (int b = budget; b >= 0 ; b--)
+            {
+                if(present[i] <= b)
+                {
+                    dp[b] = Math.Max(dp[b], future[i] - present[i] + dp[b - present[i]]); 
+                }                      
+            }
+        }
+        return dp[budget];
+    }
+}
+
+//Memory Optimization
+public class Solution1 {
     public int MaximumProfit(int[] present, int[] future, int budget) {
         int[] after = new int[budget + 1]; 
         //int[] current = after; //new int[budget + 1]; We technically don't need
