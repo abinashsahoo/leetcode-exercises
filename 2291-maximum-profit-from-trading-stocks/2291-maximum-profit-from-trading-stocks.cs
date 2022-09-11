@@ -6,7 +6,7 @@ public class Solution {
         
         for (int index = present.Length - 1; index >= 0; index--)
         {
-            for (int b = budget; b >= 0; b--)
+            for (int b = 0; b <= budget; b++)
             {
                 int buyProfit = -1;
                 if(present[index] <= b)//Needed otherwise we'd end up buying stock overbudget
