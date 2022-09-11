@@ -2,11 +2,11 @@
 public class Solution {
     public int MaximumProfit(int[] present, int[] future, int budget) {
         int[] after = new int[budget + 1]; 
-        int[] current = after;
+        //int[] current = after; //new int[budget + 1]; We technically don't need
         for (int index = present.Length - 1; index >= 0; index--)
         {
+            for (int b = budget; b >= 0 ; b--) //Order matters because we are dealing with same array. Otherwise we need CopyTo
             //for (int b = 0; b <= budget; b++)
-            for (int b = budget; b >= 0 ; b--)
             {
                 int buyProfit = -1;
                 if(present[index] <= b)//Needed otherwise we'd end up buying stock overbudget
@@ -15,11 +15,13 @@ public class Solution {
                 }
                 int notBuyProfit = after[b];
 
-                current[b] = Math.Max(buyProfit, notBuyProfit);       
+                after[b] = Math.Max(buyProfit, notBuyProfit);       
             }
-            after = current;
+            
+            //after = current;
+            //current.CopyTo(after, 0);
         }
-        return current[budget];
+        return after[budget];
     }
 }
 
