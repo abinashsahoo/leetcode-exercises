@@ -10,9 +10,9 @@ public class Solution {
             {
                 dpCurrent[0,k] = Math.Max(prices[i] + dpAfter[1, k-1], dpAfter[0, k]);
                 dpCurrent[1,k] = Math.Max(-prices[i] + dpAfter[0, k], dpAfter[1, k]);
-
-                dpAfter = dpCurrent;
             }
+
+            dpAfter = dpCurrent;
         }
             
         return dpCurrent[1,2];
