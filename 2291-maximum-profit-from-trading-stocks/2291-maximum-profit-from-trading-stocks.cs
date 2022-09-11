@@ -1,6 +1,31 @@
+//Iterative
 public class Solution {
     public int MaximumProfit(int[] present, int[] future, int budget) {
-        int[,] dp = new int[present.Length, budget + 1];
+        //If it's a value add + 1. For Iterative, arr Length + 1, because in the code we are using index + 1
+        int[,] dp = new int[present.Length + 1, budget + 1]; 
+        
+        for (int index = present.Length - 1; index >= 0; index--)
+        {
+            for (int b = 0; b <= budget; b++)
+            {
+                int buyProfit = -1;
+                if(present[index] <= b)//Needed otherwise we'd end up buying stock overbudget
+                {
+                    buyProfit = future[index] - present[index] + dp[index + 1, b - present[index]];
+                }
+                int notBuyProfit = dp[index + 1, b];
+
+                dp[index, b] = Math.Max(buyProfit, notBuyProfit);       
+            }
+        }
+        return dp[0, budget];
+    }
+}
+
+//Memo
+public class SolutionMemo {
+    public int MaximumProfit(int[] present, int[] future, int budget) {
+        int[,] dp = new int[present.Length, budget + 1]; //If it's a value add + 1
         ArrayFill(dp, -1);
         return MaximumProfit(present, future, 0, budget, dp);
     }
