@@ -1,5 +1,30 @@
-//Iterative
+//Memory Optimization
 public class Solution {
+    public int MaximumProfit(int[] present, int[] future, int budget) {
+        int[] after = new int[budget + 1]; 
+        int[] current = after;
+        for (int index = present.Length - 1; index >= 0; index--)
+        {
+            //for (int b = 0; b <= budget; b++)
+            for (int b = budget; b >= 0 ; b--)
+            {
+                int buyProfit = -1;
+                if(present[index] <= b)//Needed otherwise we'd end up buying stock overbudget
+                {
+                    buyProfit = future[index] - present[index] + after[b - present[index]];
+                }
+                int notBuyProfit = after[b];
+
+                current[b] = Math.Max(buyProfit, notBuyProfit);       
+            }
+            after = current;
+        }
+        return current[budget];
+    }
+}
+
+//Iterative
+public class SolutionIterative {
     public int MaximumProfit(int[] present, int[] future, int budget) {
         //If it's a value add + 1. For Iterative, arr Length + 1, because in the code we are using index + 1
         int[,] dp = new int[present.Length + 1, budget + 1]; 
