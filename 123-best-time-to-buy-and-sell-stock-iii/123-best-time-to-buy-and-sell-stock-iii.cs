@@ -1,26 +1,35 @@
-public class Solution3 {
+public class Solution {
     
-    public int MaxProfit1(int[] prices) {
-        var dpAhead = new int[2];
-        dpAhead[0] = 0; //Not Buy state; stores the max profit
-        dpAhead[1] = 0; //Buy state; stores the max profit
-        var dpCurrent = new int[2];
+    public int MaxProfit(int[] prices) {
+        int[,,] dp = new int[prices.Length + 1, 2, 3]; //dp states
+        //ArrayFill(dp, -1); //Time O(2n) // This is not required; because base case values are 0
         for (int i = prices.Length - 1; i >= 0; i--)
         {
-            dpCurrent[0] = Math.Max(dpAhead[0], dpAhead[1] + prices[i]); 
-            dpCurrent[1] = Math.Max(dpAhead[1], dpAhead[0] - prices[i]);
-            
-            dpAhead = dpCurrent;
+            for (int buy = 0; buy <= 1; buy++)
+            {
+                for (int k = 1; k <=2; k++)//Starts from 1 to 2
+                {
+                    if (buy == 1)
+                    {
+                        dp[i,buy,k] = Math.Max(-prices[i] + dp[i+1, 0, k], dp[i+1, 1, k]);
+                    }
+                    else
+                    {
+                        dp[i,buy,k] = Math.Max(prices[i] + dp[i+1, 1, k-1], dp[i+1, 0, k]);
+                    }
+                }
+            }
         }
             
-        return dpCurrent[1];
+        return dp[0,1,2];
     }
 }
+                                               
 
 //Memoization - Reduce tran count on sell
-public class Solution {
+public class Solution3 {
     public int MaxProfit(int[] prices) {
-        int[,,] dp = new int[prices.Length, 3, 2]; //dp states
+        int[,,] dp = new int[prices.Length, 2, 3]; //dp states
         ArrayFill(dp, -1); //Time O(2n)
         return MaxProfit(prices, 0, 1, 2, dp);
     }
@@ -30,8 +39,8 @@ public class Solution {
         if (index == prices.Length || k <= 0) // NOTE: I need to add the condition here, because no more options available!
             return 0;
 
-        if (dp[index,k,buy] != -1)
-            return dp[index,k,buy];
+        if (dp[index,buy,k] != -1)
+            return dp[index,buy,k];
         
         int profit = 0;
         if (buy == 1)
@@ -43,7 +52,7 @@ public class Solution {
             profit = Math.Max(prices[index] + MaxProfit(prices, index + 1, 1, k - 1, dp), MaxProfit(prices, index + 1, 0, k, dp));
         }
         
-        return dp[index,k,buy] = profit;
+        return dp[index,buy,k] = profit;
     }
     
     //Time O(2n)
