@@ -19,7 +19,11 @@ public class Solution {
                 lo++;
                 score++;
             }
-            else if(score >= 1)
+            //else if(score >= 1)
+            else if(score >= 1 && power + tokens[hi] >= tokens[lo])
+            //More optimum
+            // Make sure by gaining this power we are able to earn score
+            //  else it makes no point of spending score
             {
                 power += tokens[hi];
                 hi--;
@@ -27,9 +31,9 @@ public class Solution {
             }
             else
             {
-                break;//lo++;
+                break;//lo++; //lo++ also works, but break is better!
             }
-            maxScore = Math.Max(maxScore, score);
+            maxScore = Math.Max(maxScore, score); // moving this inside first if NOT required it seems!
         }
         return maxScore;
     }
