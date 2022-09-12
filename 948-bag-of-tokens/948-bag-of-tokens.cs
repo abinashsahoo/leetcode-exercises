@@ -27,7 +27,7 @@ public class Solution {
             }
             else
             {
-                lo++;
+                break;//lo++;
             }
             maxScore = Math.Max(maxScore, score);
         }
