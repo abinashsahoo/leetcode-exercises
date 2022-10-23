@@ -1,4 +1,5 @@
-public class Solution {
+// Time: O (m + n) : e.g., nums1 {4,5,6}, nums2 = { 1,2,3 }
+public class Solution2 {
     public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
         // int[] combined = new int[front.Length + back.Length];
         // Array.Copy(front, combined, front.Length);
@@ -30,6 +31,22 @@ public class Solution {
         else
         {
             return newArray[quotient];
+        }
+    }
+}
+//Time: (m + n)log(m + n)
+public class Solution {
+    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+        int[] union = nums1.Concat(nums2).ToArray();
+        Array.Sort(union);
+        var middle = union.Length/2;
+        if(union.Length % 2 != 0)
+        {
+            return (double)union[middle];
+        }
+        else
+        {
+            return (double)(union[middle - 1] + union[middle])/2;
         }
     }
 }
