@@ -1,13 +1,41 @@
+
+//Time: O(NK)
+//Space: O(NK) --> If no anagrams: items count would be N; Each list would contain 1 item (of length K)
+public class Solution2 {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+        var dict = new Dictionary<string, IList<string>>();
+        foreach (var str in strs)
+        {
+            var delimitedCharCount = GetDelimitedCharCount(str);
+            if (!dict.ContainsKey(delimitedCharCount))
+            {
+               dict[delimitedCharCount] = new List<string>();      
+            }
+            dict[delimitedCharCount].Add(str);
+        }
+        return dict.Values.ToList();
+    }
+    
+    private string GetDelimitedCharCount(string str)
+    {
+        var charCount = new int[26];
+        foreach (char c in str)
+        {
+            charCount[c - 'a']++;
+        }
+        return string.Join(",", charCount);
+    }
+}
+
+//Time: O(NKlogK)
+//Space: O(NK) --> If no anagrams: items count would be N; Each list would contain 1 item (of length K)
 public class Solution {
     public IList<IList<string>> GroupAnagrams(string[] strs) {
         if (strs == null || strs.Length == 0)
         {
             return new List<IList<string>>();            
         }
-        
-        List<IList<string>> res = new List<IList<string>>();
-        var dict = new Dictionary<string, List<string>>();
-        
+        var dict = new Dictionary<string, IList<string>>();        
         foreach (var str in strs)
         {
             string cur = new string(str.OrderBy(x => x).ToArray());
@@ -18,14 +46,15 @@ public class Solution {
             dict[cur].Add(str);
         }
         
-        foreach (var item in dict.Values)
-        {
-            res.Add(item);            
-        }
+        // foreach (var item in dict.Values)
+        // {
+        //     res.Add(item);            
+        // }
         
-        return res;
+        return dict.Values.ToList();
     }
 }
+
 
 //Question: Does it contain only lower case?
 //TLE
@@ -62,7 +91,7 @@ public class Solution1 {
             return false;
         }
         
-        var dict = new Dictionary<char, int>();        
+        var dict = new Dictionary<char, int>();  //Max storage 26 chars      
         for (int i = 0; i < source.Length; i++)
         {
             char s = source[i];
