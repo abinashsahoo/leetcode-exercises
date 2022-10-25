@@ -1,3 +1,7 @@
+//1. Use two pointers (with a dictionary/map): left and right to represent a window.
+//2. Move right to find a valid window.
+//3. When a valid window is found, move left to find a smaller window/until invalid.
+
 //Time: O(N)
 //Space: Should be constant space if (distinct types of char)
 //Time: O(N)
@@ -14,7 +18,7 @@ public class Solution {
                 counter--;
             map[rightChar]--; //Let it go negative
             right++;
-            while (counter == 0)
+            while (counter == 0) //valid substring
             {
                 if (right - left < minLength)
                 {
@@ -23,7 +27,7 @@ public class Solution {
                 }
                 char leftChar = s[left];
                 map[leftChar]++;
-                if (map[leftChar] > 0) 
+                if (map[leftChar] > 0) //Invalid substring
                     counter++;
                 left++;
             }
