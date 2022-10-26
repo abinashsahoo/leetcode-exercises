@@ -49,6 +49,86 @@ public class Solution {
         int maxRow = grid.Length;
         int maxColumn = grid[0].Length;
         
+        bool IsLand(Coordinate c) => grid[c.Row][c.Column] == '1';
+        
+        int result = 0;
+        var visited = new HashSet<Coordinate>();
+        for (int i = 0; i < maxRow; i++)
+        {
+            for (int j = 0; j < maxColumn; j++)
+            {
+                var curCoord = new Coordinate(i, j);
+                if (IsLand(curCoord) && !visited.Contains(curCoord))//grid[i][j] == '1'
+                {
+                    result++;
+                    
+                    var queue = new Queue<Coordinate>();                    
+                    queue.Enqueue(curCoord);
+                    visited.Add(curCoord);
+                    
+                    while (queue.Count > 0)
+                    {
+                        var curIsland = queue.Dequeue();                        
+                        foreach(var island in GetNeighbors(curIsland, maxRow, maxColumn))
+                        {
+                            if (IsLand(curIsland) && !visited.Contains(island))
+                            {
+                                queue.Enqueue(island);
+                                visited.Add(island);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+        return result;
+    }    
+    
+    private IEnumerable<Coordinate> GetNeighbors(Coordinate c, int maxRow, int maxColumn)
+    {
+        foreach (var d in Directions)
+        {
+            int neighborRow = c.Row + d[0];
+            int neighborCol = c.Column + d[1];
+            
+            if (neighborRow >= 0 && neighborRow < maxRow 
+                && neighborCol >= 0 && neighborCol < maxColumn)
+            {
+                yield return new Coordinate(neighborRow, neighborCol);
+            }
+        }
+    }
+    
+    public struct Coordinate
+    {
+        public int Row { get; }
+        public int Column { get; }
+        
+        public Coordinate(int row, int column)
+        {
+            Row = row;
+            Column = column;
+        }        
+    }
+
+}
+
+//BFS - Using visited Array
+public class SolutionVisitedArray {
+    private static readonly int[][] Directions = 
+        new int[][]
+            {
+                new int[] { -1, 0 }, 
+                new int[] { 0, 1 }, 
+                new int[] { 1, 0 }, 
+                new int[] { 0, -1 }
+            };
+    
+    public int NumIslands(char[][] grid) {
+        int maxRow = grid.Length;
+        int maxColumn = grid[0].Length;
+        
         int result = 0;
         //var visited = new HashSet<Coordinate>();
         bool[,] visited = new bool[maxRow, maxColumn];
@@ -97,7 +177,7 @@ public class Solution {
         }
     }
     
-    public class Coordinate : IEquatable<Coordinate>
+    public class Coordinate //: IEquatable<Coordinate>
     {
         public int Row { get; }
         public int Column { get; }
@@ -108,24 +188,12 @@ public class Solution {
             Column = column;
         }
         
-        public bool Equals(Coordinate? other)
-        {
-            return this.Row == other?.Row && this.Column == other?.Column;
-        }
+        // public bool Equals(Coordinate? other)
+        // {
+        //     return this.Row == other?.Row && this.Column == other?.Column;
+        // }
+        
     }
-    
-//     public class CoordinatesComparer : IComparer<Coordinate>
-//     {
-//         public int Compare(Coordinate x, Coordinate y)
-//         {
-//             if ((a.x == b.x) && (a.y == b.y))
-//                 return 0;
-//             if ((a.x < b.x) || ((a.x == b.x) && (a.y < b.y)))
-//                 return -1;
-
-//             return 1;
-//         }
-//     }
 
 }
 
