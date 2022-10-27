@@ -5,7 +5,10 @@ public class Solution {
         var antiDiagSet = new HashSet<int>();//r + c
         
         var board = new char?[n, n];
-        var result = new List<IList<string>>();        
+        var result = new List<IList<string>>();      
+        Backtrack(0);
+        return result;
+        
         void Backtrack(int row)
         {
             if (row == n)
@@ -43,9 +46,6 @@ public class Solution {
             antiDiagSet.Remove(row + col);
             board[row, col] = null; 
         }
-        
-        Backtrack(0);
-        return result;
     }
     
     IEnumerable<string> GetResult(char?[,] board)
