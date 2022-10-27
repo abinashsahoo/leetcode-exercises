@@ -1,18 +1,54 @@
 public class WordDictionary {
-    private Dictionary<char, WordDictionary> children;
+    private readonly WordNode root = new WordNode();
+
+    public void AddWord(string word) {
+        var node = root;
+        foreach (var c in word)
+        {
+            node = node.Nodes[c - 'a'] ??= new WordNode();
+        }
+        node.IsWord = true;
+    }
+
+    public bool Search(string word) => Search(word, 0, root);
+
+    private bool Search(string word, int index, WordNode node) 
+    {
+        if (word.Length == index)
+            return node.IsWord;
+
+        return word[index] == '.'
+            ? node.Nodes.Where(n => n != null).Any(n => Search(word, index + 1, n))
+            : node.Nodes[word[index] - 'a'] != null
+                && Search(word, index + 1, node.Nodes[word[index] - 'a']);
+    }
+
+    private class WordNode {
+        public WordNode[] Nodes { get; } //NOTE: I can still do: node.Nodes[c - 'a'] ??= new WordNode();
+        public bool IsWord { get; set; }
+
+        public WordNode() {
+            Nodes = new WordNode[26];
+            IsWord = false;
+        }
+    }
+}
+
+public class WordDictionary1 {
+    private Dictionary<char, WordDictionary1> children;
     bool isEndOfWord;
     
-    public WordDictionary() {
+    public WordDictionary1() {
         children = new();
     }
     
     public void AddWord(string word) {
-        WordDictionary curr = this;
+        var curr = this;
         foreach(char c in word)
         {
             if (!curr.children.ContainsKey(c))
             {
-                curr.children[c] = new WordDictionary();
+                curr.children[c] = new WordDictionary1();
             }
             curr = curr.children[c];
         }
@@ -20,7 +56,7 @@ public class WordDictionary {
     }
     
     public bool Search(string word) {        
-        WordDictionary curr = this;
+        var curr = this;
         for (int i = 0; i < word.Length; i++)
         {
             char c = word[i];
