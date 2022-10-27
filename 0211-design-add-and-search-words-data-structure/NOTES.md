@@ -1,1 +1,1 @@
-​
+node = node.Nodes[c - 'a'] ??= new WordNode();
