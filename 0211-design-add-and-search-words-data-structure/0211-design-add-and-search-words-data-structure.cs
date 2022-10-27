@@ -1,4 +1,4 @@
-public class WordDictionary {
+public class WordDictionary2 {
     private readonly WordNode root = new WordNode();
 
     public void AddWord(string word) {
@@ -34,11 +34,11 @@ public class WordDictionary {
     }
 }
 
-public class WordDictionary1 {
-    private Dictionary<char, WordDictionary1> children;
+public class WordDictionary {
+    private Dictionary<char, WordDictionary> children;
     bool isEndOfWord;
     
-    public WordDictionary1() {
+    public WordDictionary() {
         children = new();
     }
     
@@ -48,7 +48,7 @@ public class WordDictionary1 {
         {
             if (!curr.children.ContainsKey(c))
             {
-                curr.children[c] = new WordDictionary1();
+                curr.children[c] = new WordDictionary();
             }
             curr = curr.children[c];
         }
