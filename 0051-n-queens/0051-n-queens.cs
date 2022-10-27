@@ -1,11 +1,11 @@
 public class Solution {
-    public IList<IList<string>> SolveNQueens(int n) {
-        var result = new List<IList<string>>();
+    public IList<IList<string>> SolveNQueens(int n) {        
         var colSet = new HashSet<int>();
         var diagSet = new HashSet<int>();//r - c
         var antiDiagSet = new HashSet<int>();//r + c
-        var board = new char?[n, n];
         
+        var board = new char?[n, n];
+        var result = new List<IList<string>>();        
         void Backtrack(int row)
         {
             if (row == n)
