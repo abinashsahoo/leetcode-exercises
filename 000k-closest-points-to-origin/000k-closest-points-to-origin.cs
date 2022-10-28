@@ -19,7 +19,13 @@ public class Solution {
                 }
             }
             //(Element, Priority) -> Tuple
-            return pq.UnorderedItems.Select(i => i.Element).ToArray();
+            //return pq.UnorderedItems.Select(i => i.Element).ToArray();
+            
+            int[][] res = new int[k][];
+            while (k > 0) {
+                res[--k] = pq.Dequeue();
+            }
+            return res;
         }
     
         private class DistanceComparer : IComparer<int>
