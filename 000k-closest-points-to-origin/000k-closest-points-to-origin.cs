@@ -1,4 +1,38 @@
+
+//PriorityQueue - Simplified
+//Time: O(NLogK)
+//Space: O(K)
 public class Solution {
+        public int[][] KClosest(int[][] points, int k)
+        {
+            int GetDistance(int x, int y) => x * x + y * y;
+
+            var pq = new PriorityQueue<int[], int>(new DistanceComparer());
+            foreach (var p in points)
+            {
+                int distance = GetDistance(p[0], p[1]);
+                pq.Enqueue(p, distance);
+                
+                if (pq.Count > k)
+                {
+                    pq.Dequeue();
+                }
+            }
+            //(Element, Priority) -> Tuple
+            return pq.UnorderedItems.Select(i => i.Element).ToArray();
+        }
+    
+        private class DistanceComparer : IComparer<int>
+        {
+            public int Compare(int x, int y)
+            {
+                return y.CompareTo(x);
+            }
+        }
+}
+//Time: O(NLogK)
+//Space: O(K)
+public class SolutionPQ {
         public int[][] KClosest(int[][] points, int k)
         {
             int GetDistance(int x, int y) => x * x + y * y;
@@ -37,7 +71,8 @@ public class Solution {
             }
         }
 }
-
+//Time: O(NLogN)
+//Space: O(N)
 public class Solution2 {
     public int[][] KClosest(int[][] points, int k) {
         return points.Select(p => new { Point = p, Distance = p[0]*p[0] + p[1]*p[1] }) //Not need to perform Sqrt 
