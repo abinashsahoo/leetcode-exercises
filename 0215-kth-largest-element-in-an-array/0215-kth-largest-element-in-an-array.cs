@@ -2,7 +2,7 @@
 
 //Interesting way to devide: Though it's O(N) space
 //Quickselect
-public class Solution {
+public class Solution1 {
 
     public int FindKthLargest(int[] nums, int k) {        
         // var rand = new Random();
@@ -27,7 +27,7 @@ public class Solution {
 }
 
 //Quickselect
-public class Solution1 {
+public class Solution {
     
     //NOTE: Kth largest means (k - 1) th index item
     public int FindKthLargest(int[] nums, int k) {
@@ -51,20 +51,47 @@ public class Solution1 {
         return nums[k - 1];
     }
     
+    
+    
     private int Partition(int[] nums, int left, int right)
     {
-        //var rand = new Random();
-        //int pivotIndex = rand.Next(left, right);
-        int pivot = nums[left];
-        while (left < right)
-        {
-            while (left < right && nums[right] <= pivot) right--;
-                nums[left] = nums[right];
-            while (left < right && nums[left] >= pivot) left++;
-                nums[right] = nums[left];
+        var rand = new Random();
+        int pivotIndex = rand.Next(left, right);
+        int pivot = nums[pivotIndex];
+        
+        // 1. move pivot to end
+        (nums[right], nums[pivotIndex]) = (nums[pivotIndex], nums[right]);
+        //swap(pivotIndex, right);
+        //int store_index = left;
+
+        // 2. move all greater elements to the left
+        for (int i = left; i <= right; i++) {
+          if (nums[i] > pivot) {
+              (nums[left], nums[i]) = (nums[i], nums[left]);
+              left++;
+            //swap(store_index, i);
+            //store_index++;
+          }
         }
-        nums[left] = pivot;
+
+        // 3. move pivot to its final place
+        //swap(store_index, right);
+        (nums[left], nums[right]) = (nums[right], nums[left]);
+
+        //return store_index;
         return left;
+        
+        
+        // int pivot = nums[left];
+        // while (left < right)
+        // {
+        //     while (left < right && nums[right] <= pivot) right--;
+        //         nums[left] = nums[right];
+        //     while (left < right && nums[left] >= pivot) left++;
+        //         nums[right] = nums[left];
+        // }
+        // nums[left] = pivot;
+        // return left;
     }
 }
 
