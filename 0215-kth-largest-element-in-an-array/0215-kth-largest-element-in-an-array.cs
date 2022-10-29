@@ -1,14 +1,18 @@
+//Note that all these algorithms retuens kth largest element in the sorted order, not the kth distinct element.
+
+//Interesting way to devide: Though it's O(N) space
 //Quickselect
 public class Solution {
 
     public int FindKthLargest(int[] nums, int k) {        
-        var rand = new Random();
-        int pivotIndex = rand.Next(nums.Length - 1);
-        int pivot = nums[pivotIndex];
+        // var rand = new Random();
+        // int pivotIndex = rand.Next(nums.Length - 1);
+        // int pivot = nums[pivotIndex];
+        int pivot = nums[0];//This would also work
         
-        var leftPart =  nums.Where(n => n > pivot).ToArray();
-        var midPart  =  nums.Where(n => n == pivot).ToArray();
-        var rightPart = nums.Where(n => n < pivot).ToArray();
+        var leftPart =  nums.Where(n => n > pivot).ToArray();//O(n)
+        var midPart  =  nums.Where(n => n == pivot).ToArray();//O(n); works with duplicates!
+        var rightPart = nums.Where(n => n < pivot).ToArray();//O(n)
         
         int left = leftPart.Length;
         int mid = midPart.Length; 
