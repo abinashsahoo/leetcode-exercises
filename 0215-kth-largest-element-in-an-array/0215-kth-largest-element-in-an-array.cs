@@ -1,5 +1,30 @@
 //Quickselect
 public class Solution {
+
+    public int FindKthLargest(int[] nums, int k) {        
+        var rand = new Random();
+        int pivotIndex = rand.Next(nums.Length - 1);
+        int pivot = nums[pivotIndex];
+        
+        var leftPart =  nums.Where(n => n > pivot).ToArray();
+        var midPart  =  nums.Where(n => n == pivot).ToArray();
+        var rightPart = nums.Where(n => n < pivot).ToArray();
+        
+        int left = leftPart.Length;
+        int mid = midPart.Length; 
+                
+        if (k <= left)
+            return FindKthLargest(leftPart, k);
+        else if (k > left + mid)
+            return FindKthLargest(rightPart, k - left - mid);
+        else
+            return midPart[0];
+    }
+}
+
+//Quickselect
+public class Solution1 {
+    
     //NOTE: Kth largest means (k - 1) th index item
     public int FindKthLargest(int[] nums, int k) {
         int left = 0, right = nums.Length - 1;
