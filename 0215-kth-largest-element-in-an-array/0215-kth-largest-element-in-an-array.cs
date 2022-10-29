@@ -1,15 +1,16 @@
-public class Solution1 {
+//Quickselect
+public class Solution {
     //NOTE: Kth largest means (k - 1) th index item
     public int FindKthLargest(int[] nums, int k) {
         int left = 0, right = nums.Length - 1;
         while (left <= right)
         {
             int pivotIndex = Partition(nums, left, right);
-            if (pivotIndex == k)
+            if (pivotIndex == k - 1)
             {
-                break;
+                return nums[pivotIndex];
             }
-            else if (pivotIndex < k)
+            else if (pivotIndex < k - 1)
             {
                 left = pivotIndex + 1;
             }
@@ -18,7 +19,7 @@ public class Solution1 {
                 right = pivotIndex - 1;
             }
         }
-        return nums[k];
+        return nums[k - 1];
     }
     
     private int Partition(int[] nums, int left, int right)
@@ -41,7 +42,7 @@ public class Solution1 {
 //MinHeap
 // O(Nlogk) -heap of size k, N times that means O(Nlogk) 
 //Space: O(k)
-public class Solution {
+public class SolutionMinHeap {
     //NOTE: Kth largest means (k - 1) th index item
     public int FindKthLargest(int[] nums, int k) {
         var pq = new PriorityQueue<int, int>();
