@@ -67,7 +67,7 @@ public class Solution
         if (cache.ContainsKey(word)) 
             return cache[word];
             
-        for (int i = 1; i < word.Length; i++) 
+        for (int i = 1; i < word.Length; i++) //Interesting? Not checking the entire length?
         {
             if (wordSet.Contains(word.Substring(0, i))) 
             {
