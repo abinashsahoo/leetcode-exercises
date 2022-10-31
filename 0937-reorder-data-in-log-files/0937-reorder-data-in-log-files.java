@@ -22,10 +22,10 @@ class Solution {
                 }
 
                 // case 2). one of logs is digit-log
-                if (!isDigit1 && isDigit2)
+                if (!isDigit1)// && isDigit2)
                     // the letter-log comes before digit-logs
                     return -1;
-                else if (isDigit1 && !isDigit2)
+                else if (!isDigit2)// && !isDigit2)
                     return 1;
                 else
                     // case 3). both logs are digit-log
