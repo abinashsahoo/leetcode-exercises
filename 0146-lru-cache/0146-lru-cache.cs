@@ -19,7 +19,7 @@ public class LRUCache
         }
         
         _lru.Remove(node);
-        _cache[key] = _lru.AddFirst(node.Value);
+        _cache[key] = _lru.AddFirst(node.Value);//This AddFirst accepts "Value"
         
         return node.Value.Value;        
     }
