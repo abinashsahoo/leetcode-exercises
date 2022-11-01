@@ -18,15 +18,15 @@ public class Solution {
             char c = s[right];
             if (map.ContainsKey(c))
             {
-                            
+                result = Math.Max(result, right - left);              
                 left = Math.Max(map[c] + 1, left); // Because Left might be ahead already
             }
             map[c] = right;
             right++;
-            result = Math.Max(result, right - left);   
+            //result = Math.Max(result, right - left);   
         }
         
-        return result;//Math.Max(result, right - left); //Imp!
+        return Math.Max(result, right - left); //result; //Imp!; when result = Math.Max is inside if
     }
     
     //NOTE This is more intuitive; but can be simplified!
