@@ -7,7 +7,7 @@ public class Solution {
             var c = s[r];
             dict[c] = dict.ContainsKey(c) ? dict[c] + 1 : 1;
             
-            if(dict.Count > 2)//dict.Keys.Count
+            while(dict.Count > 2)//same as dict.Keys.Count
             {
                 //delete the leftmost character, reduce count
                 dict[s[l]]--;
